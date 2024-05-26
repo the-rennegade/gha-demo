@@ -1,6 +1,0 @@
-repos:
-  - repo: https://github.com/pre-commit/mirrors-yamllint
-    rev: v1.26.3  # You can check for the latest version and update accordingly
-    hooks:
-      - id: yamllint
-        files: \.ya?ml$

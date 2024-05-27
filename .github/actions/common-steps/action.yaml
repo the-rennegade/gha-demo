@@ -1,0 +1,14 @@
+name: "Common Steps"
+description: "Common steps for dev and prod jobs"
+inputs:
+  environment:
+    description: "The environment for the job"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run a script
+      run: echo "Running job in ${{ inputs.environment }} environment"

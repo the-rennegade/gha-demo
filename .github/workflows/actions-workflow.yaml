@@ -1,0 +1,30 @@
+name: Actions Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/actions-workflow.yaml'
+
+jobs:
+  dev-job:
+    name: Development Job
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Run common steps for dev
+        uses: ./.github/actions/common-steps
+        with:
+          environment: dev
+
+  prod-job:
+    name: Production Job
+    runs-on: ubuntu-latest
+    needs: dev-job
+    environment: prod
+    steps:
+      - name: Run common steps for prod
+        uses: ./.github/actions/common-steps
+        with:
+          environment: prod

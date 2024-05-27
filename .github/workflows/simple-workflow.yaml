@@ -8,7 +8,7 @@ on:
       - '.github/workflows/simple-workflow.yaml'
 
 jobs:
-  build:
+  message-workflow:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

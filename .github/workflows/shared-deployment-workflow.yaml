@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-    - name: Run common steps for dev
-      uses: ./.github/workflows/common-steps.yaml
+    - name: Run deployment for dev
+      uses: ./.github/workflows/shared-workflow.yaml
       with:
         environment: dev
       secrets:
-        MESSAGE: ${{ secrets.MESSAGE }}
+        MESSAGE_TEXT: ${{ secrets.MESSAGE }}
 
   prod-job:
     name: Production Job
@@ -27,9 +27,9 @@ jobs:
     needs: dev-job
     environment: prod
     steps:
-    - name: Run common steps for prod
-      uses: ./.github/workflows/common-steps.yaml
+    - name: Run deployment for prod
+      uses: ./.github/workflows/shared-workflow.yaml
       with:
         environment: prod
       secrets:
-        MESSAGE: ${{ secrets.MESSAGE }}
+        MESSAGE_TEXT: ${{ secrets.MESSAGE }}

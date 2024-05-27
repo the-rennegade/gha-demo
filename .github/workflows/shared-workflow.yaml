@@ -8,7 +8,7 @@ on:
         required: true
         type: string
     secrets:
-      MESSAGE:
+      MESSAGE_TEXT:
         required: true
 
 jobs:
@@ -27,4 +27,4 @@ jobs:
     - name: Hello World
       run: |
         echo "Hello World"
-        echo "Secret: ${{ secrets.MESSAGE }}"
+        echo "Secret: ${{ secrets.MESSAGE_TEXT }}"

@@ -8,7 +8,9 @@ runs:
   using: "composite"
   steps:
     - name: Print Env
+      shell: bash
       run: echo "Environment - ${{ inputs.environment }}"
 
     - name: Run a script
+      shell: bash
       run: echo "Running job in ${{ inputs.environment }} environment"

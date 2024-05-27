@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - '.github/workflows/actions-workflow.yaml'
+      - '.github/actions/common-steps'
 
 jobs:
   dev-job:

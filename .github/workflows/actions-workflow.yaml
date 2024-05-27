@@ -13,10 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-      - name: Run common steps for dev
-        uses: ./.github/actions/common-steps
-        with:
-          environment: dev
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run common steps for dev
+      uses: ./.github/actions/common-steps
+      with:
+        environment: dev
 
   prod-job:
     name: Production Job
@@ -24,7 +27,10 @@ jobs:
     needs: dev-job
     environment: prod
     steps:
-      - name: Run common steps for prod
-        uses: ./.github/actions/common-steps
-        with:
-          environment: prod
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run common steps for prod
+      uses: ./.github/actions/common-steps
+      with:
+        environment: prod

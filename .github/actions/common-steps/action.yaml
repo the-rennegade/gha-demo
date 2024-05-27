@@ -7,8 +7,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Print Env
+      run: echo "Environment - ${{ inputs.environment }}"
 
     - name: Run a script
       run: echo "Running job in ${{ inputs.environment }} environment"

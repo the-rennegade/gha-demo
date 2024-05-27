@@ -3,28 +3,48 @@ name: Deployment Workflow (Shared)
 on:
   workflow_call:
     inputs:
-      environment:
-        description: 'The environment to use'
+      message:
+        description: 'Message to display'
         required: true
         type: string
     secrets:
-      MESSAGE_TEXT:
+      token:
         required: true
 
 jobs:
-  shared-deployment:
+  dev-job:
+    name: Development Job
     runs-on: ubuntu-latest
-
+    environment: dev
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Run common steps for ${{ inputs.environment }}
+    - name: Run common steps for dev
       uses: ./.github/actions/common-steps
       with:
-        environment: ${{ inputs.environment }}
+        environment: dev
 
     - name: Hello World
       run: |
         echo "Hello World"
-        echo "Secret: ${{ secrets.MESSAGE_TEXT }}"
+        echo "Secret: ${{ secrets.token }}"
+
+  prod-job:
+    name: Production Job
+    runs-on: ubuntu-latest
+    needs: dev-job
+    environment: prod
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run common steps for prod
+      uses: ./.github/actions/common-steps
+      with:
+        environment: prod
+
+    - name: Hello World
+      run: |
+        echo "Hello World"
+        echo "Secret: ${{ secrets.token }}"

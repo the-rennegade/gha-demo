@@ -9,27 +9,10 @@ on:
       - '.github/workflows/shared-deployment-workflow.yaml'
 
 jobs:
-  dev-job:
-    name: Development Job
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-    - name: Run deployment for dev
-      uses: ./.github/workflows/shared-workflow.yaml
-      with:
-        environment: dev
-      secrets:
-        MESSAGE_TEXT: ${{ secrets.MESSAGE }}
-
-  prod-job:
-    name: Production Job
-    runs-on: ubuntu-latest
-    needs: dev-job
-    environment: prod
-    steps:
-    - name: Run deployment for prod
-      uses: ./.github/workflows/shared-workflow.yaml
-      with:
-        environment: prod
-      secrets:
-        MESSAGE_TEXT: ${{ secrets.MESSAGE }}
+  deployment:
+    name: Run deployment
+    uses: ./.github/workflows/shared-workflow.yaml
+    with:
+      message: "Hello World"
+    secrets:
+      token: ${{ secrets.TOKEN }}

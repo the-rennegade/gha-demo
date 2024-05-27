@@ -1,0 +1,35 @@
+name: Shared Deployment Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/shared-workflow.yaml'
+      - '.github/workflows/shared-deployment-workflow.yaml'
+
+jobs:
+  dev-job:
+    name: Development Job
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+    - name: Run common steps for dev
+      uses: ./.github/workflows/common-steps.yaml
+      with:
+        environment: dev
+      secrets:
+        MESSAGE: ${{ secrets.MESSAGE }}
+
+  prod-job:
+    name: Production Job
+    runs-on: ubuntu-latest
+    needs: dev-job
+    environment: prod
+    steps:
+    - name: Run common steps for prod
+      uses: ./.github/workflows/common-steps.yaml
+      with:
+        environment: prod
+      secrets:
+        MESSAGE: ${{ secrets.MESSAGE }}

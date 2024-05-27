@@ -1,0 +1,30 @@
+name: Deployment Workflow (Shared)
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'The environment to use'
+        required: true
+        type: string
+    secrets:
+      MESSAGE:
+        required: true
+
+jobs:
+  shared-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run common steps for ${{ inputs.environment }}
+      uses: ./.github/actions/common-steps
+      with:
+        environment: ${{ inputs.environment }}
+
+    - name: Hello World
+      run: |
+        echo "Hello World"
+        echo "Secret: ${{ secrets.MESSAGE }}"

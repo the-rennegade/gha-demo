@@ -1,0 +1,40 @@
+name: Artifact Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/artifact-workflow.yaml'
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Write message to file
+        run: echo "Hello from Job 1!" > message.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: message-file
+          path: message.txt
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: message-file
+          path: ./downloaded-artifact
+
+      - name: Read and print message
+        run: cat ./downloaded-artifact/message.txt

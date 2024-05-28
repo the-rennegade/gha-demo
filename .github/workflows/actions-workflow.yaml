@@ -21,7 +21,6 @@ jobs:
       uses: ./.github/actions/common-steps
       with:
         environment: dev
-
   prod-job:
     name: Production Job
     runs-on: ubuntu-latest

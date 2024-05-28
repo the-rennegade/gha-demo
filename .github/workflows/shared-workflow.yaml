@@ -43,7 +43,6 @@ jobs:
       uses: ./.github/actions/common-steps
       with:
         environment: prod
-
     - name: Hello World
       run: |
         echo "Hello World"

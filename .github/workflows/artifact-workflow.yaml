@@ -35,6 +35,5 @@ jobs:
         with:
           name: message-file
           path: ./downloaded-artifact
-
       - name: Read and print message
         run: cat ./downloaded-artifact/message.txt
